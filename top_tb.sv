@@ -1,0 +1,173 @@
+// Copyright (c) 2020 Sonal Pinto
+// SPDX-License-Identifier: Apache-2.0
+
+`timescale 1ns/10ps
+
+`define CYCLE 10.0    // Cycle time
+`define MAX 100000    // Max cycle number
+`define prog_path "./test/prog0/main.hex"
+`define gold_path "./test/prog0/golden.hex"
+
+`define mem_word(addr) \
+  {top.dm.mem[addr+3], \
+  top.dm.mem[addr+2], \
+  top.dm.mem[addr+1], \
+  top.dm.mem[addr]}
+
+`define ANSWER_START 'h9000
+
+`include "./src/Top.v"
+
+module top_tb;
+
+  logic clk;
+  logic rst;
+
+  logic [31:0] GOLDEN [64];
+  integer gf;               // pointer of golden file
+  integer num;              // total golden data
+  integer err;              // total number of errors compared to golden data
+
+  integer i;
+
+  Top top (
+    .clk(clk),
+    .rst(rst)
+  );
+
+  always #(`CYCLE/2) clk = ~clk;
+
+  initial begin
+
+    clk = 0; rst = 1;
+    #(`CYCLE) rst = 0;
+
+
+    // Load program and preset data to im & dm 
+    $readmemh(`prog_path, top.im.mem);
+    $readmemh(`prog_path, top.dm.mem);
+
+
+    // Initialize part of the memory (needed by the test program)
+    `mem_word('h9078) = 32'd0;
+    `mem_word('h907c) = 32'd0;
+    `mem_word('h9080) = 32'd0;
+    `mem_word('h9084) = 32'd0;
+    `mem_word('hfffc) = 32'd0;
+
+
+    // Initialize register[0] = 0 (hardwire to ground)
+    top.regfile.registers[0] = 32'd0;
+
+
+    // Load Gloden Data
+    num = 0;
+    gf = $fopen(`gold_path, "r");
+while (!$feof(gf)) begin
+  void'($fscanf(gf, "%h\n", GOLDEN[num]));
+  num++;
+end
+
+    $fclose(gf);
+
+
+    // Wait until end of execution
+    wait(top.dm.mem[16'hfffc] == 8'hff);
+    $display("\nDone\n");
+
+
+    // Compare result with Golden Data
+    err = 0;
+    for (i = 0; i < num; i++)
+    begin
+      if (`mem_word(`ANSWER_START + i*4) !== GOLDEN[i])
+      begin
+        $display("DM['h%4h] = %h, expect = %h", `ANSWER_START + i*4, `mem_word(`ANSWER_START + i*4), GOLDEN[i]);
+        err = err + 1;
+      end
+      else
+      begin
+        $display("DM['h%4h] = %h, pass", `ANSWER_START + i*4, `mem_word(`ANSWER_START + i*4));
+      end
+    end
+
+
+    // Print result
+    result(err, num);
+    $finish;
+
+  end
+
+  task result;
+    input integer err;
+    input integer num;
+    begin
+      if (err === 0)
+      begin
+        $display("\n");
+        $display("\n");
+        $display("                                      `;-.          ___,");
+        $display("        ****************************    `.`\\_...._/`.-\"`");
+        $display("        **                        **      \\        /      ,");
+        $display("        **                        **      /()   () \\   .' `-._");
+        $display("        **   Congratulations !!   **     |)  .    ()\\ /   _.'");
+        $display("        **                        **     \\  -'-     ,; '. <");
+        $display("        **                        **      ;.__     ,;|   > \\");
+        $display("        **   Simulation PASS!!    **     / ,    / ,  |.-'.-'");
+        $display("        **                        **    (_/    (_/ ,;|.<`");
+        $display("        **                        **      \\    ,     ;-`");
+        $display("        ****************************       >   \\    /");
+        $display("                                          (_,-'`> .'");
+        $display("                                               (_,'");
+        $display("\n");
+      end
+      else
+      begin
+        $display("\n");
+        $display("\n");
+        $display("        ****************************     /*\\_...._/*^\\");
+        $display("        **                        **    (/^\\       / \\)  ,");
+        $display("        **                        **      / X   X  \\   .' `-._");
+        $display("        **   OOPS!                **     |)  .    ()\\ /   _.'");
+        $display("        **                        **     \\   ^     ,; '. <");
+        $display("        **                        **      ;.__     ,;|   > \\");
+        $display("        **   Simulation Failed!!  **     / ,    / ,  |.-'.-'");
+        $display("        **                        **    (_/    (_/ ,;|.<`");
+        $display("        **                        **      \\    ,     ;-`");
+        $display("        ****************************       >   \\    /");
+        $display("                                          (_,-'`> .'");
+        $display("                                               (_,'");
+        $display("         Totally has %d errors"                     , err);
+        $display("\n");
+      end
+    end
+  endtask
+
+  initial begin
+    #(`CYCLE*`MAX)
+    $finish;
+  end
+
+logic [31:0] last_pc;
+int stuck;
+
+always @(posedge clk) begin
+  if (rst) begin
+    last_pc <= 32'hx;
+    stuck <= 0;
+  end else begin
+    if (top.F_pc_out === last_pc) stuck++;
+    else stuck = 0;
+
+    last_pc <= top.F_pc_out;
+
+    if (stuck == 200) begin
+      $display("PC stuck at %h, D_inst=%h, E_op=%b, stall=%b, jb=%b, dm_fffc=%h",
+               top.F_pc_out, top.D_inst, top.E_op, top.stall, top.E_jb_out, top.dm.mem[16'hfffc]);
+      $stop;
+    end
+  end
+end
+
+
+endmodule

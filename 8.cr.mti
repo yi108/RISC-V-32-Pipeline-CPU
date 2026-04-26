@@ -1,0 +1,128 @@
+{C:/computer organization/LAB8_TEST/src/Mux3to1.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Mux3to1.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Mux3to1
+
+Top level modules:
+	Mux3to1
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Reg_M.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Reg_M.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Reg_M
+
+Top level modules:
+	Reg_M
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Top.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Top.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Top
+
+Top level modules:
+	Top
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/SRAM.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/SRAM.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module SRAM
+
+Top level modules:
+	SRAM
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/JB_Unit.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/JB_Unit.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module JB_Unit
+
+Top level modules:
+	JB_Unit
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Controller.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Controller.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Controller
+
+Top level modules:
+	Controller
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/LD_Filter.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/LD_Filter.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module LD_Filter
+
+Top level modules:
+	LD_Filter
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Decoder.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Decoder.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Decoder
+
+Top level modules:
+	Decoder
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Reg_PC.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Reg_PC.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Reg_PC
+
+Top level modules:
+	Reg_PC
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Mux2to1.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Mux2to1.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Mux2to1
+
+Top level modules:
+	Mux2to1
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Reg_D.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Reg_D.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Reg_D
+
+Top level modules:
+	Reg_D
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/ALU.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/ALU.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Reg_E.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Reg_E.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Reg_E
+
+Top level modules:
+	Reg_E
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Imm_Ext.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Imm_Ext.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Imm_Ext
+
+Top level modules:
+	Imm_Ext
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Reg_W.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Reg_W.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Reg_W
+
+Top level modules:
+	Reg_W
+
+} {} {}} {C:/computer organization/LAB8_TEST/top_tb.sv} {1 {vlog -work work -vopt -sv {C:/computer organization/LAB8_TEST/top_tb.sv}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Top
+-- Compiling module top_tb
+
+Top level modules:
+	top_tb
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/RegFile.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/RegFile.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module RegFile
+
+Top level modules:
+	RegFile
+
+} {} {}} {C:/computer organization/LAB8_TEST/src/Adder.v} {1 {vlog -work work -vopt {C:/computer organization/LAB8_TEST/src/Adder.v}
+Model Technology ModelSim SE-64 vlog 10.1c Compiler 2012.07 Jul 27 2012
+-- Compiling module Adder
+
+Top level modules:
+	Adder
+
+} {} {}}
